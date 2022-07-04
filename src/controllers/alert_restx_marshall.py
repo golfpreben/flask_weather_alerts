@@ -14,7 +14,9 @@ alert_fields = {
     'alert_destination': fields.String(required=True,
                                        description=f'Alert destination should be one of these: '
                                                    f'{AlertService.AlertDestinationsList}',
-                                       example=f'{AlertService.AlertDestinations.EMAIL}')
+                                       example=f'{AlertService.AlertDestinations.EMAIL}'),
+    'threshold_exceeded': fields.Boolean(description='boolean which will be populated when checking the'
+                                                     'threshold')
 }
 
 alert_marshall = api.model("alert", alert_fields)

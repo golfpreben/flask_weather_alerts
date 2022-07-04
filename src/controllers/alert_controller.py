@@ -29,3 +29,13 @@ class AlertsController(Resource):
         alert_model_obj.alert_destination = payload_dict.get('alert_destination')
 
         return alert_service.create_alert(alert_model_obj), 201
+
+
+@ns.route('/check/<int:id>')
+@ns.param('id', 'id of the alert to check')
+class CheckAlertsController(Resource):
+    """ Checks an alert with the specified id """
+    @ns.marshal_list_with(alert_marshall)
+    def get(self, id) -> AlertModel:
+        # TODO: fetch the alert with the id, check the threshold, save it and return it.
+        return 200
