@@ -9,6 +9,7 @@ from src.models.alert_model import AlertModel
 
 log = logging.getLogger(__name__)
 
+
 class AlertService:
     """ Service which handles business logic related to alerts """
 
@@ -21,9 +22,10 @@ class AlertService:
 
     AlertDestinationsList = [AlertDestinations.EMAIL, AlertDestinations.SMS]
 
-    def __init__(self):
-        self.alert_dal = AlertDAL()
-        self.open_weather_map_adapter = OpenWeatherMapAdapter()
+    def __init__(self, alert_dal: AlertDAL = None,
+                 open_weather_map_adapter: OpenWeatherMapAdapter = None):
+        self.alert_dal = alert_dal or AlertDAL()
+        self.open_weather_map_adapter = open_weather_map_adapter or OpenWeatherMapAdapter()
 
     def _validate_alert(self, alert_model: AlertModel):
         if abs(alert_model.temperature_below_threshold_celsius) > 80:
